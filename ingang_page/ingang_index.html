@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ingang</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"
+        integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Geo" />
+    <style>
+        body {
+            transform: scale(0.8);
+            /* transform-origin: 0 0; */
+            position: relative;
+            width: 1920px;
+            height: 1080px;
+            background: #030312;
+            margin: auto;
+        }
+
+        button.login {
+            position: absolute;
+            width: auto;
+            max-width: 30;
+            height: auto;
+            left: 1640px;
+            top: 114px;
+            font-family: 'Geo';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 40px;
+            border: none;
+            /* identical to box height */
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+            background-color: #030312;
+            word-break: break-all;
+            /*  */
+            word-wrap: break-word;
+        }
+
+        button.no_metamask {
+            position: absolute;
+            width: auto;
+            max-width: 100;
+            height: auto;
+            left: 1500px;
+            top: 114px;
+            font-family: 'Geo';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 40px;
+            border: none;
+            /* identical to box height */
+            /* display: flex;
+            align-items: center; */
+            color: #FFFFFF;
+            background-color: #030312;
+        }
+
+        button.login:hover {
+            color: #7755FF;
+            cursor: pointer;
+        }
+
+        p.login {
+            position: absolute;
+            width: 280px;
+            height: 100px;
+            left: 1560px;
+            top: 200px;
+            font-family: 'Geo';
+            font-style: normal;
+            font-size: 30px;
+            color: #FFFFFF;
+            text-align: center;
+            background-color: #030312;
+            word-break: break-all;
+            /*  */
+            word-wrap: break-word;
+            /* if you want to cut the complete word */
+            white-space: normal;
+            /* be sure its not 'nowrap'! ! ! :/ */
+        }
+
+        a.header {
+            position: absolute;
+            width: 280px;
+            height: 100px;
+            left: 1560px;
+            top: 400px;
+            font-family: 'Geo';
+            font-style: normal;
+            font-size: 30px;
+            color: #FFFFFF;
+            text-align: center;
+            background-color: #030312;
+            word-break: break-all;
+            /*  */
+            word-wrap: break-word;
+            /* if you want to cut the complete word */
+            white-space: normal;
+            /* be sure its not 'nowrap'! ! ! :/ */
+        }
+
+        a.arweave {
+            position: fixed;
+            font-family: 'Geo';
+            font-style: normal;
+            font-size: 20px;
+            margin-left: 80px;
+            margin-top: -20px;
+            color : #1c5be4
+        }
+
+        button.ingang {
+            position: absolute;
+            width: 150px;
+            height: 40px;
+            left: 68px;
+            top: 226px;
+
+            font-family: 'Geo';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 40px;
+            border: none;
+            /* identical to box height */
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+            background-color: #030312;
+        }
+
+        button.ingang:hover {
+            color: #7755FF;
+            cursor: pointer;
+        }
+
+        button.following {
+            position: absolute;
+            width: 150px;
+            height: 40px;
+            left: 68px;
+            top: 306px;
+
+            font-family: 'Geo';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 40px;
+            border: none;
+            /* identical to box height */
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+            background-color: #030312;
+        }
+
+        button.following:hover {
+            color: #7755FF;
+            cursor: pointer;
+        }
+
+        button.my_page {
+            position: absolute;
+            width: 150px;
+            height: 40px;
+            left: 68px;
+            top: 386px;
+
+            font-family: 'Geo';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 40px;
+            border: none;
+            /* identical to box height */
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+            background-color: #030312;
+        }
+
+        button.my_page:hover {
+            color: #7755FF;
+            cursor: pointer;
+        }
+
+        button.setting {
+            position: absolute;
+            width: 150px;
+            height: 40px;
+            left: 68px;
+            top: 466px;
+            font-family: 'Geo';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 36px;
+            line-height: 40px;
+            border: none;
+            /* identical to box height */
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+            background-color: #030312;
+        }
+
+        button.setting:hover {
+            color: #7755FF;
+            cursor: pointer;
+        }
+
+        svg.ingang {
+            position: absolute;
+            width: 51px;
+            height: 35px;
+            left: 0px;
+            top: 228px;
+        }
+
+        textarea.input {
+            position: absolute;
+            width: 896px;
+            height: 158px;
+            left: 409px;
+            top: 50px;
+            font-size: 20px;
+            background: #000000;
+            border: 5px solid #8B55FF;
+            border-radius: 5px;
+            resize: none;
+            color: #FFFFFF;
+
+        }
+
+
+        button.input {
+            position: absolute;
+            width: 173px;
+            height: 73px;
+            left: 1334px;
+            top: 150px;
+            background: #8B55FF;
+            border-radius: 10px;
+
+            font-family: 'Geo';
+            font-style: normal;
+            font-size: 32px;
+            line-height: 36px;
+            text-align: center;
+            color: #FFFFFF;
+            border: none;
+        }
+
+        button.input:hover {
+            background: #9587CD;
+            cursor: pointer;
+        }
+
+        .middle {
+            position: absolute;
+            width: 1106px;
+            height: auto;
+            min-height: 100%;
+            left: 402px;
+            top: 251px;
+
+            background: #0A2742;
+        }
+
+        .message {
+            width: 1071px;
+            height: auto;
+            left: 349px;
+            /* top: 316px; */
+        }
+
+        .message time {
+            position: relative;
+            width: auto;
+            height: 27px;
+            float: right;
+            margin-right: 20px;
+            margin-top: 50px;
+            font-family: 'Geo';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 27px;
+            color: #9587CD;
+        }
+
+        .message button {
+            position: relative;
+            width: auto;
+            height: 27px;
+            margin-top: 50px;
+            margin-left: 65px;
+            /* margin-top: auto; */
+            /* font-family: 'Geo'; */
+            font-style: normal;
+            border: none;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 27px;
+            color: #9587CD;
+            background-color: #0A2742;
+        }
+
+        .message p {
+            position: relative;
+            max-width: 900px;
+            height: auto;
+            left: 66px;
+            margin-top: 5px;
+            max-height: 200px;
+            padding: 30px;
+            overflow: auto;
+            font-size: 20px;
+            color: #FFFFFF;
+            background: #9587CD;
+            border-radius: 5px;
+            padding-right: 60px;
+        }
+
+        .message button:hover {
+            color: #7755FF;
+            cursor: pointer;
+        }
+
+        .fa-heart-o {
+            position: fixed;
+            size: 40px;
+            margin-top: -42px;
+            margin-left: 1020px;
+            float: right;
+            color: white;
+            cursor: pointer;
+        }
+
+        .fa-heart {
+            position: fixed;
+            size: 40px;
+            margin-top: -42px;
+            margin-left: 1020px;
+            float: right;
+            color: #7755FF;
+            cursor: pointer;
+        }
+
+        #snackbar {
+
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #5e3fdb;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 400px;
+            font-size: 17px;
+        }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <svg width="51" height="35" viewBox="0 0 51 35" fill="none" xmlns="http://www.w3.org/2000/svg" class="ingang">
+        <rect width="51" height="35" fill="#7755FF" />
+    </svg>
+
+    <a href="https://ingang.xyz/ingang"><img src="./ingang.svg" alt="Ingang SVG" /></a>
+    <button class="login" id="loginButton">Log In</button>
+    <p id="login_address" class="login"></p>
+
+    <a id="header" class="header"
+        href="https://mirror.xyz/0xC3a21b522F39120290D63A2ad250ca7CB81FAb1F/gv2fZcBqLyUDvg7oyq3FEB-JA40syAaUfoGw2mAU-nU">About
+        us</a>
+
+    <button id="ingangButton" class="ingang">Ingang</button>
+    <button id="followingButton" class="following">Following</button>
+    <button id="mypageButton" class="my_page">My page</button>
+    <!-- <button id="settingButton" class="setting">Setting</button> -->
+
+    <textarea id="inputtxt" name="inputtxt" class="input"> type in what you want to say.</textarea>
+    <button id='inputbutton' onclick="" class="input"><i class="mx-auto rounded-md"> </i> Post Now</button>
+
+    <div id="middle" class="middle">
+        <!-- <div id="test_message" class="message">
+            <button>0x71C7656EC7ab88b098defB751B7401B5f6d8976F</button>
+            <time id='content_header'> 06/06/2022, 12:00:48</time>
+            <p> this is test this is test this is test this is testthis is test this is test his is test this is test
+                this is test this is testthis is <br>
+            </p>
+            <i class="fa fa-fw fa-heart"></i>
+            <a class="arweave" href="https://google.com"> arweave </a>
+        </div> -->
+
+    </div>
+
+    <div id="snackbar">content saved</div>
+
+    <script src="./ingang/ingang.js"></script>
+</body>
+
+</html>

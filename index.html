@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ingang</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        /* @media screen and (max-height: 100%) {
+            .sidebar {
+                padding-top: 15px;
+            }
+
+            .sidebar button {
+                font-size: 18px;
+            }
+        } */
+
+        /*top nav bar*/
+
+        .topnav {
+            top: 0px;
+            z-index: 1;
+            left: 0px;
+            height: 80px;
+            width: 100%;
+            overflow: auto;
+            background-color: navy;
+            position: fixed;
+        }
+
+        .topnav button {
+            border-radius: 10px;
+            height: 40px;
+            float: right;
+            background-color: #111;
+            color: darkgray;
+            text-align: center;
+            /* padding: 14px 16px; */
+            text-decoration: none;
+            font-size: 15px;
+            cursor: pointer;
+            margin-right: 0px;
+            margin-top: 20px;
+        }
+
+        .topnav button:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav button.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        .topnav p {
+            font-size: 15px;
+            background-color: navy;
+            color: white;
+            float: right;
+            margin-right: 10px;
+            margin-top: 30px;
+        }
+
+        .topnav-right {
+            float: right;
+        }
+
+        .topnav a {
+            font-size: 20px;
+            background-color: navy;
+            color: lightgray;
+            float: left;
+            margin-left: 20%;
+            margin-top: 30px;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 160px;
+            position: fixed;
+            z-index: 1;
+            top: 80px;
+            left: 0;
+            background-color: rgb(33, 23, 79);
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidebar button {
+            padding: 6px 8px 6px 16px;
+            text-decoration: azure;
+            font-size: 22px;
+            background-color: rgb(16, 20, 17);
+            color: rgb(12, 71, 174);
+            display: block;
+            cursor: pointer;
+        }
+
+        .sidebar button:hover {
+            color: #f1f1f1;
+        }
+
+        .main {
+            margin-top: 80px;
+            margin-left: 160px;
+            /* Same as the width of the sidenav */
+            background-color: rgb(33, 23, 79);
+            height: 100%;
+            overflow: auto;
+        }
+
+        .input textarea {
+            margin-top: 20px;
+            margin-left: 20px;
+            height: 100px;
+            width: 70%;
+            background-color: black;
+            color: darkgray;
+            resize: none;
+        }
+
+        .input button {
+            margin-top: 40px;
+            margin-right: 2%;
+            border-radius: 25px;
+            float: right;
+            height: 50px;
+            background-color: #111;
+            color: darkgray;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: aqua;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .input button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .input button.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        .content button {
+            font-size: 15px;
+            cursor: pointer;
+            background-color: rgb(56, 49, 49);
+            color: rgb(59, 108, 136);
+            overflow: auto;
+            border-radius: 5px;
+        }
+
+        .content time {
+            margin-top: 10px;
+            font-size: 12px;
+            padding: 0px;
+            height: 12px;
+            width: 100px;
+            overflow: hidden;
+            margin-left: 0px;
+            background-color: rgb(56, 49, 49);
+            color: rgb(59, 108, 136);
+        }
+
+        .content p {
+            font-size: 20px;
+            border-radius: 15px;
+            border: 2px solid black;
+            padding: 4px;
+            height: auto;
+            max-height: 200px;
+            width: 80%;
+            overflow: auto;
+            margin-left: 20px;
+            background-color: rgb(56, 49, 49);
+            color: rgba(220, 231, 220, 0.435);
+        }
+
+        .likes_button {
+            cursor: pointer;
+            background-color: black;
+            color: rgba(220, 231, 220, 0.798);
+            overflow: auto;
+            border-radius: 5px;
+            float: right;
+        }
+
+        .personal_page {
+            border-radius: 5px;
+            border: 1px solid black;
+            padding: 4px;
+            height: 90px;
+            width: 600px;
+            overflow: auto;
+            margin-left: 20px;
+            background-color: rgb(40, 45, 46);
+            color: rgba(220, 231, 220, 0.435);
+        }
+        
+        .personal_page address{
+            font-size: 15px;
+            /* background-color: rgb(56, 49, 49); */
+            color: rgb(76, 141, 176);
+            margin-left: 5px;
+            margin-top: 8px;
+            overflow: auto;
+            border-radius: 5px;
+        }
+
+        .personal_page h1{
+            font-size: 12px;
+            margin-left: 20px;
+            margin-top: 7px;
+            /* background-color: rgb(56, 49, 49); */
+            color: rgb(67, 99, 116);
+            overflow: auto;
+            border-radius: 5px;
+        }
+
+        .personal_page a{
+            font-size: 15px;
+            margin-left: 30px;
+            margin-top: 5px;
+            /* background-color: rgb(56, 49, 49); */
+            color: rgb(131, 167, 187);
+            overflow: auto;
+            border-radius: 5px;
+        }
+
+        .personal_page button{
+            border-radius: 10px;
+            height: 38px;
+            width: 80px;
+            float: right;
+            background-color: rgb(26, 93, 129);
+            color: darkgray;
+            text-align: center;
+            /* padding: 14px 16px; */
+            text-decoration: none;
+            font-size: 15px;
+            cursor: pointer;
+            overflow: auto;
+            margin-right: 0px;
+            margin-top: 0px;
+        }
+
+        .personal_page button:hover {
+            background: #f1f1f1;
+        }
+        
+    </style>
+</head>
+
+<body style="background-color:black;">
+
+    <div class="topnav">
+        <a id="header" href="https://mirror.xyz/0xC3a21b522F39120290D63A2ad250ca7CB81FAb1F/gv2fZcBqLyUDvg7oyq3FEB-JA40syAaUfoGw2mAU-nU">Announcement</a>
+        <div class="topnav-right">
+            <button id='loginButton' onclick=""><i class="mx-auto rounded-md"></i> Login</button>
+            <p id='user_address'>You are not login</p>
+        </div>
+    </div>
+
+    <div class="main" id="main">
+        <div class="sidebar">
+            <button id='ingangbutton' onclick=""><i class="fa fa-fw fa-coffee"></i> Ingang</button>
+            <button id='followingbutton' onclick=""><i class="fa fa-fw fa-eye"></i> Following</button>
+            <button id='mypagebutton' onclick=""><i class="fa fa-fw fa-user"></i> Mypage</button>
+            <button id='settingbutton' onclick=""><i class="fa fa-fw fa-gear"></i> Setting</button>
+        </div>
+
+        <div class="input">
+            <textarea id="inputtxt" name="inputtxt"> type in what you want to say.</textarea>
+            <button id='inputbutton' onclick=""><i class="mx-auto rounded-md"></i> Upload your content</button>
+        </div>
+
+        <!-- <div id="test" class="personal_page">
+            <address class = "address"> 0xc3a21b522f39120290d63a2ad250ca7cb81fab1f</address>
+            <h1>this is my nick name</h1>
+            <a class = "nick_name" href = "google.com">etherscan </a>
+            <button >follow</button>
+        </div> -->
+
+        <div id="test1" class="content">
+            <p id='content_header'> <button id="creater"> 0xsdfasdfads</button> <br>
+                <time id='content_header'> 06/06/2022, 12:00:48</time> <br>
+                This is Ingang <button id="likebutton" class="likes_button">Like</button>
+            </p>
+        </div>
+    </div>
+    <script src="./front_end.js"></script>
+</body>
+
+</html>
